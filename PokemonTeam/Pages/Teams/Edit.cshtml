@@ -1,0 +1,68 @@
+﻿@page
+@model PokemonTeam.Pages.Teams.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="row">
+    <h1>Editing Team @Model.Team.Name</h1>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Team.ID" />
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Team.Name" class="control-label"></label>
+                    <input asp-for="Team.Name" class="form-control" />
+                    <span asp-validation-for="Team.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group my-2">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+                <div class="my-2">
+                    <a class="btn btn-secondary" asp-page="./Index">Back to List</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="my-2 d-flex justify-content-between">
+                    <a class="btn btn-primary" >Previous</a>
+                    <a class="btn btn-primary">Next</a>
+                </div>
+                <div class="form-group overflow-auto position-relative" style="height: 50vh">
+                    <table class="table position-absolute top-0 left-0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Pokemon
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var pokemon in Model.Pokemon)
+                        {
+                            <tr>
+                                 <td>
+                                    <input type="checkbox"
+                                            name="selectedPokemon"
+                                            class="form-check-input"
+                                            value="@pokemon.Name"
+                                            @(Html.Raw(pokemon.Selected ? "checked=\"checked\"" : ""))
+                                    />
+                                    @pokemon.Name
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+    </form>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

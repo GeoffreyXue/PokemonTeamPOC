@@ -1,0 +1,44 @@
+﻿@page
+@model PokemonTeam.Pages.Teams.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Assembled Teams:</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Team[0].Name)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Team) {
+                    <tr>
+                        <td>
+                            <h4>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </h4>
+                        </td>
+                        <td>
+                            <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.ID">Add Pokemon</a>
+                            <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.ID">Dissolve</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+            <div>
+                <a class="btn btn-primary" asp-page="Create">Create a New Team</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
